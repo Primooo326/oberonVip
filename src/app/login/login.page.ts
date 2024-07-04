@@ -10,8 +10,7 @@ import { Preferences } from '@capacitor/preferences';
 import { Network } from '@capacitor/network';
 import { Geolocation } from '@capacitor/geolocation';
 import { App } from '@capacitor/app';
-import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse, BackgroundGeolocationEvents } from '@capacitor-community/background-geolocation';
-
+import { registerPlugin } from "@capacitor/core";
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -47,8 +46,17 @@ export class LoginPage implements OnInit {
   lng: any;
   backButtonSubscription: any;
 
-  onRegistro: UntypedFormGroup;
-  onContrasena: UntypedFormGroup;
+  onRegistro: UntypedFormGroup = this.formBuilder.group({
+    stLIdentifica: [null, Validators.required],
+    stLNombres: [null, Validators.required],
+    stLApellidos: [null, Validators.required],
+    stLCelular: [null, Validators.required],
+    stLCargo: [null, Validators.required],
+    stLEmail: [null, Validators.required]
+  });
+  onContrasena: UntypedFormGroup = this.formBuilder.group({
+    stLContrasena: [null, Validators.required]
+  });
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -61,7 +69,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   async presentAlertConfirm() {
-    const infoAux = await Device.getId();
+    const infoAux: any = await Device.getId();
     this.stLUIDD = infoAux.uuid;
 
     await Preferences.set({
@@ -97,7 +105,7 @@ export class LoginPage implements OnInit {
 
   async ValidaPermisos() {
     const info = await Device.getInfo();
-    const infoAux = await Device.getId();
+    const infoAux: any = await Device.getId();
     this.stLUIDD = infoAux.uuid;
 
     await Preferences.set({
@@ -149,7 +157,7 @@ export class LoginPage implements OnInit {
   async SrValidacionAPP() {
     const CPermisoGPS = await Geolocation.checkPermissions();
     if (CPermisoGPS.location === 'granted') {
-      const infoAux = await Device.getId();
+      const infoAux: any = await Device.getId();
       this.stLUIDD = infoAux.uuid;
       this.SrConsultaIMEI(this.stLUIDD);
     } else {
@@ -305,7 +313,8 @@ export class LoginPage implements OnInit {
           let stLTelefono = data["Table"][0].CODIR_TELEFONO;
           if (stLTelefono != "") {
             this.loading.dismiss();
-            App.openUrl({ url: `tel:${stLTelefono}` });
+            // App.openUrl({ url: `tel:${stLTelefono}` });
+            window.location.href = `tel:${stLTelefono}`;
           } else {
             this.loading.dismiss();
             alert("NO Tiene Asignado el Número del Centro de Control. Contacte al Administrador")
@@ -376,9 +385,8 @@ export class LoginPage implements OnInit {
       });
     });
   }
-
   async SrSegundoPlano() {
-    const config: BackgroundGeolocationConfig = {
+    const config = {
       desiredAccuracy: 10,
       stationaryRadius: 20,
       distanceFilter: 30,
@@ -387,17 +395,32 @@ export class LoginPage implements OnInit {
       notificationTitle: 'Oberón',
       notificationText: 'Servicio Activo',
     };
+    const BackgroundGeolocation: any = registerPlugin("BackgroundGeolocation");
 
-    BackgroundGeolocation.addWatcher(config, (location: BackgroundGeolocationResponse, error: any) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
-      this.SrProcesaTracking();
-      BackgroundGeolocation.finish(); // Only for iOS
-    });
+
+    try {
+      await BackgroundGeolocation.addWatcher(
+        config,
+        (location: any, error: any) => {
+          if (error) {
+            console.error(error);
+            return;
+          }
+          this.SrProcesaTracking();
+          BackgroundGeolocation.removeWatcher({ id: 'my_watcher_id' }); // Replace with the actual watcher ID if needed
+        },
+        {
+          id: 'my_watcher_id', // Optional watcher ID
+          backgroundMessage: 'Background tracking is running...',
+          backgroundTitle: 'Tracking',
+          requestPermissions: true,
+          stale: false,
+        }
+      );
+    } catch (err) {
+      console.error('Error adding watcher:', err);
+    }
   }
-
   private SrProcesaTracking() {
     this.SrIngresaTracking().then((data: any) => {
       if (data["Table"] != null) {
