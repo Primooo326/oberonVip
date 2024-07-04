@@ -17,17 +17,17 @@ import { registerPlugin } from "@capacitor/core";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  private stLIdentifica: string = "";
-  private stLNombres: string = "";
-  private stLApellidos: string = "";
-  private stLCelular: string = "";
-  private stLUIDD: string = "";
-  private stLUIDDAux: any;
-  private stLCargo: string = "";
-  private stLEmail: string = "";
-  private stLContrasena: string = "";
-  private dataPerson: any;
-  private stLUrl: string = "";
+  stLIdentifica: string = "";
+  stLNombres: string = "";
+  stLApellidos: string = "";
+  stLCelular: string = "";
+  stLUIDD: string = "";
+  stLUIDDAux: any;
+  stLCargo: string = "";
+  stLEmail: string = "";
+  stLContrasena: string = "";
+  dataPerson: any;
+  stLUrl: string = "";
   stLClrFondoPan: string = "red";
 
   stLClrFondo: string = "";
@@ -45,6 +45,17 @@ export class LoginPage implements OnInit {
   lat: any;
   lng: any;
   backButtonSubscription: any;
+
+
+
+  stLIMEI: string = "";
+  UniqueDeviceID: string = "";
+
+  stLACCESO: string = "0";
+
+
+
+
 
   onRegistro: UntypedFormGroup = this.formBuilder.group({
     stLIdentifica: [null, Validators.required],
@@ -219,7 +230,7 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-  private SrProcesaIngreso() {
+  SrProcesaIngreso() {
     this.loading.presentTxt('Oberón Guardando Registro VIP ...');
     this.SrIngresaPersona().then((data: any) => {
       if (data["Table"] != null) {
@@ -261,7 +272,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  private SrProcesaContrasena() {
+  SrProcesaContrasena() {
     this.loading.presentTxt('Oberón Guardando Contraseña VIP ...');
     this.SrIngresaContrasena().then((data: any) => {
       if (data["Table"] != null) {
