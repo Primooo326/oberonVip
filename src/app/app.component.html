@@ -1,3 +1,72 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="menu-content">
+    <ion-menu contentId="menu-content">
+      <ion-header>
+        <ion-toolbar color="dark" class="user-profile">
+
+          <ion-item lines="none" color="dark">
+
+            <ion-avatar slot="start" class="user-avatar">
+              <img src="assets/img/Avatar.png">
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="light">
+                <!--<h2><strong>{{m_stNombres}}</strong></h2> -->
+                <!--{{loading.m_Nombres}}-->
+              </ion-text>
+              <ion-text color="primary">
+                <h3>
+                  <!--{{m_stCargo}}-->
+
+                </h3>
+              </ion-text>
+              <!--
+              <ion-chip color="light" outline="true">
+                <ion-icon name="home"></ion-icon>
+                <ion-label>Renter</ion-label>
+              </ion-chip>
+              -->
+            </ion-label>
+          </ion-item>
+
+        </ion-toolbar>
+        <!--
+        <ion-fab vertical="center" horizontal="end">
+            <ion-fab-button size="small" color="medium">
+              <ion-icon name="apps"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="bottom">
+
+              <ion-fab-button size="small" color="tertiary" routerLink="/edit-profile" routerDirection="forward" (click)="closeMenu()">
+                <ion-icon name="contact"></ion-icon>
+              </ion-fab-button>
+
+              <ion-fab-button size="small" color="tertiary" routerLink="/login" routerDirection="forward" (click)="closeMenu()">
+                <ion-icon name="log-out"></ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+        -->
+      </ion-header>
+
+      <ion-content class="bg-profile">
+        <ion-list>
+          <ion-list-header color="dark">
+            <ion-label class="ion-text-center" class="LblTitulo">MENU</ion-label>
+          </ion-list-header>
+
+          <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" color="dark"></ion-icon>
+              <ion-label color="dark" *ngIf="p.id === '4'" style="font-weight: bold;">{{ p.title }}</ion-label>
+              <ion-label color="dark" *ngIf="p.id != '4'">{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle> -->
+
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

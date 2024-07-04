@@ -1,0 +1,151 @@
+<ion-header>
+</ion-header>
+<ion-content>
+
+  <div class="theme-bg" *ngIf="stLACCESO === '0' || stLACCESO === '1'">
+    <div *ngIf="stLACCESO === '0'">
+      <form [formGroup]="onRegistro">
+        <div class="frm-cs">
+          <ion-label color="dark" class="lblinicio-cs">REGISTRESE</ion-label>
+          <ion-item class="ident-cs">
+            <ion-icon name="person-outline" slot="end"></ion-icon>
+            <ion-input type="number" formControlName="stLIdentifica" [(ngModel)]="stLIdentifica"
+              placeholder="Identificación"></ion-input>
+
+          </ion-item>
+
+          <ion-item class="user-cs">
+            <ion-icon name="person-outline" slot="end"></ion-icon>
+            <ion-input type="text" placeholder="Nombres" formControlName="stLNombres"
+              [(ngModel)]="stLNombres"></ion-input>
+
+          </ion-item>
+
+          <ion-item class="apellido-cs">
+            <ion-icon name="person-outline" slot="end"></ion-icon>
+            <ion-input type="text" placeholder="Apellidos" formControlName="stLApellidos"
+              [(ngModel)]="stLApellidos"></ion-input>
+
+          </ion-item>
+
+          <ion-item class="telefo-cs">
+            <ion-icon name="call-outline" slot="end"></ion-icon>
+            <ion-input type="number" placeholder="Celular" formControlName="stLCelular"
+              [(ngModel)]="stLCelular"></ion-input>
+
+          </ion-item>
+
+          <ion-item class="cargo-cs">
+            <ion-icon name="id-card-outline" slot="end"></ion-icon>
+            <ion-input type="text" placeholder="Cargo" formControlName="stLCargo" [(ngModel)]="stLCargo"></ion-input>
+
+          </ion-item>
+
+          <ion-item class="pwd-cs">
+            <ion-icon name="mail-outline" slot="end"></ion-icon>
+            <ion-input type="email" placeholder="E-mail" formControlName="stLEmail" [(ngModel)]="stLEmail"></ion-input>
+          </ion-item>
+          <!--<ion-label color="dark" class="lbolvido-cs">¿Olvido su Contraseña?</ion-label>-->
+
+          <!--<ion-button class="btn-cs"  icon-left size="small"  expand="block" color="dark" routerLink="/home" routerDirection="forward" [disabled]="!onRegistro.valid">-->
+          <ion-button class="btn-cs" icon-left size="small" expand="block" color="dark" (click)="SrProcesaIngreso()"
+            [disabled]="!onRegistro.valid">
+            Solicitar Acceso
+            <ion-icon name="log-in"></ion-icon>
+          </ion-button>
+
+
+        </div>
+      </form>
+    </div>
+    <!--Contasena-->
+    <div *ngIf="stLACCESO === '1'">
+      <form [formGroup]="onContrasena">
+        <div class="frm-cs">
+          <ion-label color="dark" class="lblinicio-cs">CONTRASEÑA</ion-label>
+          <ion-item class="contrasena-cs">
+            <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+            <ion-textarea rows="4" cols="20" formControlName="stLContrasena" [(ngModel)]="stLContrasena"
+              placeholder="Contraseña"></ion-textarea>
+          </ion-item>
+
+
+
+          <!--<ion-button class="btn-cs"  icon-left size="small"  expand="block" color="dark" routerLink="/home" routerDirection="forward" [disabled]="!onRegistro.valid">-->
+          <ion-button class="btnAux-cs" icon-left size="small" expand="block" color="dark"
+            (click)="SrProcesaContrasena()" [disabled]="!onContrasena.valid">
+            Registrar
+            <ion-icon name="log-in"></ion-icon>
+          </ion-button>
+
+
+        </div>
+      </form>
+    </div>
+    <!--Fin-->
+  </div>
+
+  <!--Inicion Boton-->
+  <div class="aux" *ngIf="stLACCESO === '3'">
+    <div *ngIf="stLACCESO === '3'">
+      <ion-grid class="ion-no-padding" fixed>
+
+
+        <div class="ion-no-margin">
+          <button ion-button clear (click)="SrPanico()">
+            <div class="center hover01 column">
+
+
+
+              <figure> <img src="/assets/img/pn-btn.png" /></figure>
+
+
+            </div>
+          </button>
+        </div>
+
+      </ion-grid>
+
+    </div>
+    <!--Fin-->
+  </div>
+  <!--Fin-->
+</ion-content>
+
+
+<ion-footer class="animated fadeIn" *ngIf="stLACCESO === '3'">
+  <ion-button class="ion-no-margin" class="LblTitulo" expand="full" size="large" [color]="stLColorAsistencia">
+    <ion-label class="ion-text-center" style="font-weight: bold; font-size: 20px;">{{stLEstado}}</ion-label>
+  </ion-button>
+  <ion-toolbar color="dark">
+    <ion-grid class="ion-no-padding">
+
+      <ion-row>
+        <!--
+          <ion-col size="4" class="ion-no-padding">
+            <ion-button size="small" [ngStyle]="{'background-color': stLClrFondo}" expand="full" fill="clear" color="light" (click)="SrOnLinterna()">
+              <ion-icon slot="start" [ios]="'sunny-outline'" [md]="'sunny-sharp'"></ion-icon>
+              Linterna
+            </ion-button>
+          </ion-col>
+          <ion-col size="4" class="ion-no-padding"   >
+              <ion-button  size="small" [ngStyle]="{'background-color': stLClrFondoPan}" expand="full" fill="clear" color="light" (click)="onPanico()">
+                <ion-icon slot="start" [ios]="'warning-outline'" [md]="'warning-sharp'" ></ion-icon>
+                Panico
+              </ion-button>
+            </ion-col>
+      -->
+        <ion-col [ngStyle]="{'background-color': stLClrFondoPan}" size="12" class="ion-no-padding">
+          <ion-button size="small" [ngStyle]="{'background-color': stLClrFondoPan}" expand="full" fill="clear"
+            color="light" (click)="onLlamar()">
+            <ion-icon slot="start" [ios]="'call-outline'" [md]="'call-sharp'"></ion-icon>
+
+          </ion-button>
+        </ion-col>
+
+
+
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

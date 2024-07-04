@@ -1,20 +1,115 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <!--<ion-menu-button auto-hide="false"></ion-menu-button>-->
+    </ion-buttons>
+
+
+    <ion-title>OBERÓN V.I.P.</ion-title>
+    <!--
+    <ion-buttons slot="end">
+      
+      <ion-button size="small" shape="round" color="light" (click)="notifications()">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge [color]="stLColorNotifica" slot="end">{{inLContadorNotifica}}</ion-badge>
+       
+        
+      </ion-button>
+     
+      <ion-button size="small" shape="round" color="light" (click)="closeApp()">
+        <ion-icon name="close-outline"></ion-icon>
+        
+      </ion-button>
+    </ion-buttons>
+  -->
+  </ion-toolbar>
+  <ion-toolbar color="light" class="ion-text-center">
+    <p>
+      <!--<ion-note color="white" style="font-weight: bold; font-size: 17px;">{{stLNomCliente}}</ion-note><br />
+        <ion-note color="light">{{stLNomUbicacion}}</ion-note>-->
+      <ion-note color="dark" style="font-weight: bold; font-size: 17px;">V.I.P.</ion-note><br />
+      <!--<ion-note color="secondary">Patio Jardín</ion-note>-->
+    </p>
+
+
   </ion-toolbar>
 </ion-header>
+<ion-content>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid class="ion-no-padding" fixed>
+    <ion-row class="ion-no-padding">
+      <ion-col class="ion-no-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+        <ion-button class="ion-no-margin" class="LblTitulo" expand="full" size="large" [color]="stLColorAsistencia">
+          <ion-label class="ion-text-center" style="font-weight: bold; font-size: 20px;">{{stLEstado}}</ion-label>
+        </ion-button>
+
+      </ion-col>
+      <!--
+        <ion-col class="ion-no-padding">
+          <ion-button class="ion-no-margin" expand="full" size="large" color="primary" (click)="openPropertyListPage('rent')">
+            For Rent
+          </ion-button>
+        </ion-col>
+        -->
+    </ion-row>
+
+    <div class="ion-no-margin">
+      <button ion-button clear (touchstart)="holdCount()" (touchend)="endCount()">
+        <div class="center hover01 column">
+
+          <!--
+            <input type="image" src="main/img/bg/pn-btn.png" alt="Submit" width="350" height="350">
+          -->
+          <!--<ion-button class="btnpanic" color="light">-->
+
+          <figure> <img src="/assets/img/pn-btn.png" /></figure>
+          <!--
+          </ion-button>
+        -->
+
+        </div>
+      </button>
+    </div>
+
+  </ion-grid>
+  <!--
+    <ion-button class="ion-margin" expand="full" color="secondary" (click)="openPropertyListPage()">
+      {{ 'app.button.moreresults' | translate }}
+    </ion-button>
+    -->
 </ion-content>
+
+<ion-footer class="animated fadeIn">
+  <ion-toolbar color="dark">
+    <ion-grid class="ion-no-padding">
+
+      <ion-row>
+        <!--
+          <ion-col size="4" class="ion-no-padding">
+            <ion-button size="small" [ngStyle]="{'background-color': stLClrFondo}" expand="full" fill="clear" color="light" (click)="SrOnLinterna()">
+              <ion-icon slot="start" [ios]="'sunny-outline'" [md]="'sunny-sharp'"></ion-icon>
+              Linterna
+            </ion-button>
+          </ion-col>
+          <ion-col size="4" class="ion-no-padding"   >
+              <ion-button  size="small" [ngStyle]="{'background-color': stLClrFondoPan}" expand="full" fill="clear" color="light" (click)="onPanico()">
+                <ion-icon slot="start" [ios]="'warning-outline'" [md]="'warning-sharp'" ></ion-icon>
+                Panico
+              </ion-button>
+            </ion-col>
+      -->
+        <ion-col [ngStyle]="{'background-color': stLClrFondoPan}" size="12" class="ion-no-padding">
+          <ion-button size="small" [ngStyle]="{'background-color': stLClrFondoPan}" expand="full" fill="clear"
+            color="light" (click)="onLlamar()">
+            <ion-icon slot="start" [ios]="'call-outline'" [md]="'call-sharp'"></ion-icon>
+            Centro de Control
+          </ion-button>
+        </ion-col>
+
+
+
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

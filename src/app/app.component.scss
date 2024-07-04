@@ -1,0 +1,38 @@
+:host {
+
+  ion-content {
+    //--background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
+    --background: var(--ion-color-white);
+  }
+
+  ion-list {
+    &.list-md {
+      padding: 0;
+    }
+  }
+
+  .LblTitulo {
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  ion-item {
+
+    border-radius: 0;
+    border-bottom: 1px dotted var(--ion-color-dark);
+
+  }
+
+  ion-item.item:hover a {
+    background-color: slategray;
+    box-shadow: inset 0px 0px 0px 1px red;
+  }
+
+  .footer {
+    --background: var(--ion-color-dark);
+    min-height: 3px;
+  }
+
+}
