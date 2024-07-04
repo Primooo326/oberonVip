@@ -1,0 +1,7 @@
+{
+  "name": "oberonVip",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
